@@ -33,10 +33,12 @@ namespace Minecraft_Achievements
                 fileName = openFileDialog1.FileName;
             }
 
-            
+
             AchievementsForm achievements = new AchievementsForm(this);
             achievements.LoadPlayerData(fileName);
+            achievements.Closed += (s, args) => this.Show(); 
             achievements.Show();
+            this.Hide();
         }
     }
 }

@@ -14,5 +14,8 @@ namespace Minecraft_Achievements
             ApplicationConfiguration.Initialize();
             Application.Run(new Form1());
         }
+
+        
+        
     }
 }
