@@ -26,10 +26,11 @@ namespace Minecraft_Achievements
         }
         private void addAll()
         {
+            clearTables();
             foreach (Achievement a in allAchievements)
             {
                 List<Object> labels = a.createLabels();
-                if (ShowCompleted || (!ShowCompleted && !a.Completed){
+                if (ShowCompleted || (!ShowCompleted && !a.Completed)){
 
 
                     if (a.Type == "story")
@@ -208,6 +209,30 @@ namespace Minecraft_Achievements
         {
             ShowCompleted = !ShowCompleted;
             addAll();
+        }
+
+        private void clearTables()
+        {
+            while (minecraftTable.Controls.Count > 0)
+            {
+                minecraftTable.Controls[0].Dispose();
+            }
+            while (netherTable.Controls.Count > 0)
+            {
+                netherTable.Controls[0].Dispose();
+            }
+            while (endTable.Controls.Count > 0)
+            {
+                endTable.Controls[0].Dispose();
+            }
+            while (adventureTable.Controls.Count > 0)
+            {
+                adventureTable.Controls[0].Dispose();
+            }
+            while (husbandryTable.Controls.Count > 0)
+            {
+                husbandryTable.Controls[0].Dispose();
+            }
         }
     }
 }
