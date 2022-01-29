@@ -13,10 +13,42 @@ namespace Minecraft_Achievements.Resources
             List<Achievement> list = new List<Achievement>();
             StreamReader reader = new StreamReader("listOfAchievements.csv");
             string line = reader.ReadLine();
-            do
+            while ((line = reader.ReadLine()) != null)
             {
-                line = reader.ReadLine();
-            }while (reader.Peek() != null);
+                
+                string[] parts = line.Split(',');
+                string name = parts[0];
+                string description = parts[1];
+                string type = parts[2];
+                bool multistep = parts[3].Contains("TRUE");
+                string location = parts[4];
+                
+               
+                if (multistep)
+                {
+                    List<Label> items = new List<Label>();
+                    for (int i = 5; i < parts.Length; i++)
+                    {
+                        Label label = new Label();
+                        label.BackColor = Color.Transparent;
+                        label.Font = new Font("Minecraft", 12);
+                        label.Text = parts[i];
+                        label.AutoSize = true;
+                        items.Add(label);
+                    }
+                    list.Add(new Achievement(name, description, type,location, items));
+                }
+                else
+                {
+                    Label item = new Label();
+                    item.BackColor = Color.Transparent;
+                    item.Font = new Font("Minecraft", 12);
+                    item.Text = parts[5];
+                    item.AutoSize = true;
+                    list.Add(new Achievement(name, description, type,location, item));
+                }
+            }
+            reader.Close();
             
             return list;
 

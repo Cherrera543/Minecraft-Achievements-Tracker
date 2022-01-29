@@ -11,6 +11,7 @@ namespace Minecraft_Achievements.Resources
         public string Name { get; set; }
         public string Description { get; set; }
         public string Type { get; set; }
+        private int _completedPercent = 0;
         public int CompletedPercent
         {
             get
@@ -22,27 +23,31 @@ namespace Minecraft_Achievements.Resources
                     {
                         if (l.Font.Strikeout) { itemsDone++; }
                     }
-                    return itemsDone / ItemsNeeded.Count;
+                    _completedPercent = 100 * (itemsDone / ItemsNeeded.Count);
+                    return _completedPercent;
                 }
                 if (Item.Font.Strikeout)
                 {
-                    return 100;
+                    _completedPercent = 100;
+                    return _completedPercent;
                 }
-                return 0;
+                return _completedPercent;
             }
             set
             {
-                CompletedPercent = value;
+                _completedPercent = value;
             }
         }
+        private bool _completed = false;
         public bool Completed {
             get
             {
                 if(CompletedPercent == 100)
                 {
-                    return true;
+                    _completed = true;
+                    return _completed;
                 }
-                return Completed;
+                return _completed;
             }
             set {
                 if(value == true)
@@ -58,15 +63,15 @@ namespace Minecraft_Achievements.Resources
                     else { Item.Font = new Font(Item.Font, FontStyle.Strikeout); }
                     
                 }
-                Completed = value;
+                _completed = value;
             } 
         }
         public bool MultiStep { get; set; } = false;
         public List<Label> ItemsNeeded { get; set; } = new List<Label>();
         public Label Item { get; set; } = new Label();
-        public string location { get; set; }
+        public string Location { get; set; }
 
-        public Achievement(String name, String description, string type, Label item)
+        public Achievement(String name, String description, string type,string location, Label item)
         {
             Name = name;
             Description = description;
@@ -74,8 +79,9 @@ namespace Minecraft_Achievements.Resources
             Item = item;
             MultiStep = false;
             Completed = false;
+            Location = location;
         }
-        public Achievement(String name, String description, string type, List<Label> items)
+        public Achievement(String name, String description, string type,string location, List<Label> items)
         {
             Name=name;
             Description = description;
@@ -83,9 +89,10 @@ namespace Minecraft_Achievements.Resources
             ItemsNeeded = items;
             MultiStep = true;
             Completed = false;
+            Location = location;
         }
 
-        public List<Object> createLabels()
+       /* public List<Object> createLabels()
         {
             List<Object> labels = new List<Object>();
             Label name = new Label();
@@ -114,7 +121,7 @@ namespace Minecraft_Achievements.Resources
 
             return labels; 
 
-        }
+        }*/
 
     }
 }
