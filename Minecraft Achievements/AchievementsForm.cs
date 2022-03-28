@@ -32,38 +32,26 @@ namespace Minecraft_Achievements
             int endRow = 1;
             int adventureRow = 1;
             int husbandryRow = 1;
+
+
             foreach (Achievement a in allAchievements)
             {
                 
                 if (ShowCompleted || (!ShowCompleted && !a.Completed)){
-                    Label name = new Label();
-                    name.BackColor = Color.Transparent;
-                    name.Font = new Font("Minecraft", 12);
-                    name.AutoSize = true;
-                    name.Text = a.Name;
+                    
 
-                    Label description = new Label();
-                    description.BackColor = Color.Transparent;
-                    description.Font = new Font("Minecraft", 12);
-                    description.AutoSize = true;
-                    description.Text = a.Description;
-
-                    ProgressBar pb = new ProgressBar();
-                    pb.ForeColor = Color.Green;
-                    pb.Width = 224;
-                    pb.Height = 23;
-                    pb.Value = a.CompletedPercent;
 
 
                     if (a.Type == "story")
                     {
-                        minecraftTable.Controls.Add(name, 0, minecraftRow);
-                        minecraftTable.Controls.Add(description, 1, minecraftRow);
+                        minecraftTable.Controls.Add(a.nameLabel, 0, minecraftRow);
+                        minecraftTable.Controls.Add(a.descriptionLabel, 1, minecraftRow);
 
                         if (a.MultiStep)
                         {
                             TableLayoutPanel tb = new TableLayoutPanel();
                             tb.AutoScroll = true;
+                            tb.BackColor = Color.Transparent;
                             for (int i = 0; i < a.ItemsNeeded.Count; i++)
                             {
                                 tb.Controls.Add(a.ItemsNeeded[i]);
@@ -74,20 +62,21 @@ namespace Minecraft_Achievements
                         {
                             minecraftTable.Controls.Add(a.Item, 2, minecraftRow);
                         }
-                        minecraftTable.Controls.Add(pb, 3, minecraftRow);
+                        minecraftTable.Controls.Add(a.progressBar, 3, minecraftRow);
                         minecraftRow++;
                     }
                     else if (a.Type == "nether")
                     {
-                        name.ForeColor = Color.White;
-                        netherTable.Controls.Add(name, 0, netherRow);
-                        description.ForeColor = Color.White;
-                        netherTable.Controls.Add(description, 1, netherRow);
+                        
+                        netherTable.Controls.Add(a.nameLabel, 0, netherRow);
+                        
+                        netherTable.Controls.Add(a.descriptionLabel, 1, netherRow);
 
                         if (a.MultiStep)
                         {
                             TableLayoutPanel tb = new TableLayoutPanel();
                             tb.AutoScroll = true;
+                            tb.BackColor = Color.Transparent;
                             for (int i = 0; i < a.ItemsNeeded.Count; i++)
                             {
                                 tb.Controls.Add(a.ItemsNeeded[i]);
@@ -99,20 +88,20 @@ namespace Minecraft_Achievements
                             a.Item.ForeColor = Color.White;
                             netherTable.Controls.Add(a.Item, 2, netherRow);
                         }
-                        netherTable.Controls.Add(pb, 3, netherRow);
+                        netherTable.Controls.Add(a.progressBar, 3, netherRow);
                         netherRow++;
-                        name.ForeColor = Color.Black;
-                        description.ForeColor = Color.Black;
                     }
                     else if (a.Type == "end")
                     {
-                        endTable.Controls.Add(name, 0, endRow);
-                        endTable.Controls.Add(description, 1, endRow);
+                        endTable.Controls.Add(a.nameLabel, 0, endRow);
+                        endTable.Controls.Add(a.descriptionLabel, 1, endRow);
+
 
                         if (a.MultiStep)
                         {
                             TableLayoutPanel tb = new TableLayoutPanel();
                             tb.AutoScroll = true;
+                            tb.BackColor = Color.Transparent;
                             for (int i = 0; i < a.ItemsNeeded.Count; i++)
                             {
                                 tb.Controls.Add(a.ItemsNeeded[i]);
@@ -123,19 +112,20 @@ namespace Minecraft_Achievements
                         {
                             endTable.Controls.Add(a.Item, 2, endRow);
                         }
-                        endTable.Controls.Add(pb, 3, endRow);
+                        endTable.Controls.Add(a.progressBar, 3, endRow);
                         endRow++;
-                        
+
                     }
                     else if (a.Type == "adventure")
                     {
-                        adventureTable.Controls.Add(name, 0, adventureRow);
-                        adventureTable.Controls.Add(description, 1, adventureRow);
+                        adventureTable.Controls.Add(a.nameLabel, 0, adventureRow);
+                        adventureTable.Controls.Add(a.descriptionLabel, 1, adventureRow);
 
                         if (a.MultiStep)
                         {
                             TableLayoutPanel tb = new TableLayoutPanel();
                             tb.AutoScroll = true;
+                            tb.BackColor = Color.Transparent;
                             for (int i = 0; i < a.ItemsNeeded.Count; i++)
                             {
                                 tb.Controls.Add(a.ItemsNeeded[i]);
@@ -146,18 +136,19 @@ namespace Minecraft_Achievements
                         {
                             adventureTable.Controls.Add(a.Item, 2, adventureRow);
                         }
-                        adventureTable.Controls.Add(pb, 3, adventureRow);
+                        adventureTable.Controls.Add(a.progressBar, 3, adventureRow);
                         adventureRow++;
                     }
                     else if (a.Type == "husbandry")
                     {
-                        husbandryTable.Controls.Add(name, 0, husbandryRow);
-                        husbandryTable.Controls.Add(description, 1, husbandryRow);
+                        husbandryTable.Controls.Add(a.nameLabel, 0, husbandryRow);
+                        husbandryTable.Controls.Add(a.descriptionLabel, 1, husbandryRow);
 
                         if (a.MultiStep)
                         {
                             TableLayoutPanel tb = new TableLayoutPanel();
                             tb.AutoScroll = true;
+                            tb.BackColor = Color.Transparent;
                             for (int i = 0; i < a.ItemsNeeded.Count; i++)
                             {
                                 tb.Controls.Add(a.ItemsNeeded[i]);
@@ -168,7 +159,7 @@ namespace Minecraft_Achievements
                         {
                             husbandryTable.Controls.Add(a.Item, 2, husbandryRow);
                         }
-                        husbandryTable.Controls.Add(pb, 3, husbandryRow);
+                        husbandryTable.Controls.Add(a.progressBar, 3, husbandryRow);
                         husbandryRow++;
                     }
                 }

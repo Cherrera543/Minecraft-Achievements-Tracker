@@ -8,6 +8,9 @@ namespace Minecraft_Achievements.Resources
 {
     internal class Achievement
     {
+        public Label nameLabel = new Label();
+        public Label descriptionLabel = new Label();
+        public ProgressBar progressBar = new ProgressBar();
         public string Name { get; set; }
         public string Description { get; set; }
         public string Type { get; set; }
@@ -76,20 +79,74 @@ namespace Minecraft_Achievements.Resources
             Name = name;
             Description = description;
             Type = type;
+
+            nameLabel.Text = name;
+            nameLabel.BackColor = Color.Transparent;
+            nameLabel.Font = new Font("Minecraft", 12);
+            nameLabel.AutoSize = true;
+
+            descriptionLabel.Text = description;
+            descriptionLabel.BackColor = Color.Transparent;
+            descriptionLabel.Font = new Font("Minecraft", 12);
+            descriptionLabel.AutoSize = true;
+
+            if (type == "end" || type == "adventure")
+            {
+                nameLabel.ForeColor = Color.Black;
+                descriptionLabel.ForeColor = Color.Black;
+            }
+            else
+            {
+                nameLabel.ForeColor = Color.White;
+                descriptionLabel.ForeColor = Color.White;
+            }
+
+            
             Item = item;
             MultiStep = false;
             Completed = false;
             Location = location;
+            progressBar.ForeColor = Color.Green;
+            progressBar.Width = 224;
+            progressBar.Height = 23;
+            progressBar.Value = this.CompletedPercent;
         }
         public Achievement(String name, String description, string type,string location, List<Label> items)
         {
             Name=name;
             Description = description;
-            Type=type;
+            Type = type;
+
+            nameLabel.Text = name;
+            nameLabel.BackColor = Color.Transparent;
+            nameLabel.Font = new Font("Minecraft", 12);
+            nameLabel.AutoSize = true;
+
+            descriptionLabel.Text = description;
+            descriptionLabel.BackColor = Color.Transparent;
+            descriptionLabel.Font = new Font("Minecraft", 12);
+            descriptionLabel.AutoSize = true;
+
+            if (type == "end" || type == "adventure")
+            {
+                nameLabel.ForeColor = Color.Black;
+                descriptionLabel.ForeColor = Color.Black;
+            }
+            else
+            {
+                nameLabel.ForeColor = Color.White;
+                descriptionLabel.ForeColor = Color.White;
+            }
+
+           
             ItemsNeeded = items;
             MultiStep = true;
             Completed = false;
             Location = location;
+            progressBar.ForeColor = Color.Green;
+            progressBar.Width = 224;
+            progressBar.Height = 23;
+            progressBar.Value = this.CompletedPercent;
         }
 
        /* public List<Object> createLabels()
